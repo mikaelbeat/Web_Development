@@ -93,7 +93,6 @@ p {
 /* Testimonials Section */
 
 #testimonials {
-  padding: 7% 15%;
   text-align: center;
   background-color: #EF8172;
   color: white;
@@ -103,6 +102,10 @@ p {
   width: 10%;
   border-radius: 100%;
   margin: 20px;
+}
+
+.carousel-item {
+  padding: 7% 15%;
 }
 
 /* Press Section */
@@ -117,4 +120,15 @@ p {
   width: 15%;
   /* Gives margin to top - left and right - bottom */
   margin: 20px 20px 50px;
+}
+
+/* Pricing Section */
+
+#pricing {
+  padding: 100px;
+  text-align: center;
+}
+
+.pricing-column {
+  padding: 3% 2%;
 }
