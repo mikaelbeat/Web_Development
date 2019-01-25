@@ -2,9 +2,10 @@
 document.querySelector("h1").innerHTML = "Suffeli";
 document.querySelector("h1").style.color = "red";
 
-Returns array, changing its style is not possible
+// Returns array, changing its style is not possible
 document.getElementsByTagName("li");
-Styles can be changed when element is specified in array
+
+// Styles can be changed when element is specified in array
 document.getElementsByTagName("li")[2].style.color = "yellow";
 document.getElementsByTagName("li").length;
 document.getElementsByClassName("btn")[0].style.backgroundColor = "green";
@@ -36,3 +37,13 @@ document.querySelector("button").classList.add("invinsible");
 
 // Remove given class from selected object
 document.querySelector("button").classList.remove("invinsible");
+
+document.querySelector("h1").innerHTML;
+document.querySelector("h1").textContent = "Tsau";
+
+// Changes inner html in h1 to cursive
+document.querySelector("h1").innerHTML = "<em>Hello</em>";
+
+document.querySelector("a");
+document.querySelector("a").getAttribute("href");
+document.querySelector("a").setAttribute("href", "https://www.bing.com");
