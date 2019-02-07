@@ -13,19 +13,27 @@ app.get("/", function(req, res){
 });
 
 app.post("/", function(req, res){
-  console.log(req.body.crypto);
 
-  request("https://apiv2.bitcoinaverage.com/indices/global/ticker/BTCUSD", function(error, response, body){
+  var crypto = req.body.crypto;
+  var fiat = req.body.fiat;
+  var baseURL = "https://apiv2.bitcoinaverage.com/indices/global/ticker/";
+  var finalURL = baseURL + crypto + fiat;
+
+  console.log("Crypto value is " + crypto);
+  console.log("Fiat value is " + fiat);
+
+  request(finalURL, function(error, response, body){
     var data = JSON.parse(body);
     var price = data.last;
-    console.log(price);
+    var currentDate = data.display_timestamp;
+
+    res.write("<p>The current date is " + currentDate + ".</p>");
+    res.write("<h1>The current price of " + crypto + " is " + price + " " + fiat + ".</h1>");
+    res.send();
   });
 
 });
 
 app.listen(3000, function(){
-  console.log("Server is running on port 3000.");
+  console.log("Server for Bitcoin Ticker is running on port 3000.");
 });
-
-
-// LECTURE 220 - 12:38
