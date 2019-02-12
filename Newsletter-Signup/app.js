@@ -39,17 +39,22 @@ app.post("/", function(req, res){
   var options = {
     url: "https://us20.api.mailchimp.com/3.0/lists/b7d7d5afc1",
     method: "POST",
-    headers: {
-      "Authorization": "MikaelBeat 55cdc45405226b91749bb62da88e8c6e-us20"
+    headers: {                                        // change last g -> f
+      "Authorization": "MikaelBeat a7a30494746fe8099d0929ff09eaf1dg-us20"
     },
     body: jsonData
   };
 
   request(options, function(error, response, body){
     if (error){
-      console.log("Error:  " + error);
+      res.send("Error in subscribing newsletter with error code " + response.statusCode);
     } else {
-      console.log("Status code: " + response.statusCode);
+      if (response.statusCode === 200){
+        res.send("Newsletter subscribed successfully.");
+      } else {
+        res.send("Error in subscribing newsletter with error code " + response.statusCode);
+      }
+
     }
   });
 
