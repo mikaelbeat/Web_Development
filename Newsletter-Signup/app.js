@@ -9,8 +9,9 @@ const app = express();
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.listen(3000, function(){
-  console.log("Server for Newsletter-Signup is running on port 3000");
+
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Server for Newsletter-Signup is running.");
 });
 
 app.get("/", function(req, res){
@@ -39,34 +40,27 @@ app.post("/", function(req, res){
   var options = {
     url: "https://us20.api.mailchimp.com/3.0/lists/b7d7d5afc1",
     method: "POST",
-    headers: {                                        // change last g -> f
-      "Authorization": "MikaelBeat a7a30494746fe8099d0929ff09eaf1dg-us20"
+    headers: {
+      "Authorization": "MikaelBeat a7a30494746fe8099d0929ff09eaf1df-us20"
     },
     body: jsonData
   };
 
   request(options, function(error, response, body){
     if (error){
-      res.send("Error in subscribing newsletter with error code " + response.statusCode);
+      res.sendFile(__dirname + "/failure.html");
     } else {
       if (response.statusCode === 200){
-        res.send("Newsletter subscribed successfully.");
+        res.sendFile(__dirname + "/success.html");
       } else {
-        res.send("Error in subscribing newsletter with error code " + response.statusCode);
+        res.sendFile(__dirname + "/failure.html");
       }
 
     }
   });
 
-  console.log("First name: " + firstName);
-  console.log("Last name: " + lastName);
-  console.log("Email address: " + emailAddress);
-
 });
 
-
-
-
-
-// 55cdc45405226b91749bb62da88e8c6e-us20
-// b7d7d5afc1
+app.post("/failure", function(req, res){
+  res.redirect("/");
+});
