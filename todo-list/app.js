@@ -5,6 +5,9 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
+var items = [];
+
+app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
 
 app.listen(3000, function(){
@@ -14,14 +17,22 @@ app.listen(3000, function(){
 app.get("/", function(req, res){
 
   var today = new Date();
-  var currentDay = today.getDay();
+  var options = {
+    weekday: "long",
+    day: "numeric",
+    month: "long"
+  };
 
-  if (currentDay === 6 || currentDay === 0){
-    res.send("<h1>Yay it's the weekend!</h1>");
-  } else {
-    res.send("<h1>Boo! I have to work!</h1>");
-  }
+  var day = today.toLocaleDateString("en-US", options);
 
+  res.render("list", {kindOfDay: day, newItems: items});
+
+});
+
+app.post("", function(req, res){
+  item = req.body.newItem;
+  items.push(item);
+  res.redirect("/");
 });
 
 
