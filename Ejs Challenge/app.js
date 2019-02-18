@@ -18,7 +18,25 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 app.get("/", function(req, res){
-  res.render("home", {welcomeText: homeStartingContent, pMessage: posts});
+  res.render("home", {welcomeText: homeStartingContent, pMessages: posts});
+});
+
+app.get("/posts/:topic", function(req, res){
+
+  const topic = req.params.topic;
+
+  posts.forEach(function(post){
+    const storedTitle = post.title;
+    console.log(storedTitle);
+    if (topic === storedTitle){
+      console.log("Match found");
+    } else {
+      console.log("Match not found");
+    }
+
+  });
+
+
 });
 
 app.get("/about", function(req, res){

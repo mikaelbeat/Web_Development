@@ -4,9 +4,10 @@
 <h1>Home</h1>
 <p> <%=  welcomeText %> </p>
 
-<% for (var i=0; i<pMessage.length; i++){ %>
-   <% console.log(pMessage[i].title); %>
-<% } %>
-
+<% pMessages.forEach(function(message){ %>
+<h1> <%= message.title %></h1>
+<p> <%= message.content %> </p>
+<%  console.log(message); %>
+<% }); %>
 
 <%- include("partials/footer") -%>
