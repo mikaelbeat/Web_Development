@@ -6,7 +6,7 @@
 
 <% pMessages.forEach(function(message){ %>
 <h1> <%= message.title %></h1>
-<p> <%= message.content %> </p>
+<p> <%= message.content.substring(0, 100) + " ..." %> <a href="/posts/<%=message.title%>">Read More</a></p>
 <%  console.log(message); %>
 <% }); %>
 

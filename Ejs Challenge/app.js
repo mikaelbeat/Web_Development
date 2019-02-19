@@ -18,6 +18,17 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+function truncate(text){
+  maxLenght = 100;
+  if (text.length > maxLenght){
+    let shortenedText = (text.substr(0, maxLenght) + " ...");
+    console.log("Text is too long - > " + text.length);
+    console.log("Text -> " + shortenedText);
+    return shortenedText;
+  }
+
+}
+
 app.get("/", function(req, res){
   res.render("home", {welcomeText: homeStartingContent, pMessages: posts});
 });
@@ -25,21 +36,18 @@ app.get("/", function(req, res){
 
 app.get("/posts/:topic", function(req, res){
 
-  const topic = lodash.lowerCase(req.params.topic);
-  console.log(topic);
+  const topic = req.params.topic;
+  const topicLowerCase = lodash.lowerCase(topic);
 
   posts.forEach(function(post){
-    const storedTitle = lodash.lowerCase(post.title);
-    if (topic === storedTitle){
-      console.log("Match found");
-    } else {
-      console.log("Match not found");
+    const postTitle = post.title;
+    const postMessage = post.content;
+    const postTitleLowerCase = lodash.lowerCase(postTitle);
+
+    if (topicLowerCase === postTitleLowerCase){
+      res.render("post", {dHeader: postTitle, dContent: postMessage});
     }
-
   });
-//  TÄÄ ON KESKEN
-  res.render("topic", {dHeader: dHeader, dContent: dContent});
-
 });
 
 
