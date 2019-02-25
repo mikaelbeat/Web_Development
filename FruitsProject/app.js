@@ -24,7 +24,7 @@ const fruit = new Fruit ({
   review: "Kind a sour"
 });
 
-fruit.save();
+// fruit.save();
 
 const personSchema = new mongoose.Schema ({
   name: String,
@@ -50,6 +50,16 @@ Fruit.find(function(err, fruits){
     });
   }
 });
+
+// Fruit.deleteOne({_id: "5c7153b6ca4310144c07bba8"}, function(err){
+//   if (err) {
+//     console.log("Error -> " + err);
+//   } else {
+//     console.log("One record deleted");
+//   }
+// });
+
+
 
 
 
