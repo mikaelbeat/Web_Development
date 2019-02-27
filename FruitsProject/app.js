@@ -28,15 +28,27 @@ const fruit = new Fruit ({
 
 const personSchema = new mongoose.Schema ({
   name: String,
-  age: Number
+  age: Number,
+  favouriteFruit: fruitSchema
 });
 
 const Person = mongoose.model("Person", personSchema);
 
-const person = new Person ({
-  name: "John",
-  age: 37
+const karambola = new Fruit({
+  name: "Karambola",
+  score: 10,
+  review: "Best of the best"
 });
+
+  //karambola.save();
+
+
+
+// const person = new Person ({
+//   name: "Amy",
+//   age: 12,
+//   favouriteFruit: pineapple
+// });
 
 // person.save();
 
@@ -51,13 +63,13 @@ Fruit.find(function(err, fruits){
   }
 });
 
-// Fruit.deleteOne({_id: "5c7153b6ca4310144c07bba8"}, function(err){
-//   if (err) {
-//     console.log("Error -> " + err);
-//   } else {
-//     console.log("One record deleted");
-//   }
-// });
+Person.updateOne({_id: "5c6ffb9e484c1f1cd478a999"}, {favouriteFruit: karambola}, function(err){
+  if (err) {
+    console.log("Error -> " + err);
+  } else {
+    console.log("One record deleted");
+  }
+});
 
 
 
